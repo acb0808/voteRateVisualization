@@ -1,6 +1,8 @@
 import requests, time, json
 import datetime
 
+from clear import date
+
 url = 'https://did-5.kw.ac.kr/vote/voteStatus/voteStatusBoard2.jsp'
 extend = 'https://did-5.kw.ac.kr/vote/voteCommon/keepalive.jsp'
 
@@ -30,7 +32,10 @@ def main():
         rate = float(getRate())
 
         ## MMDDHHMM
-        now = datetime.datetime.now().strftime('%m%d%H%M')
+        ## set timezone to KST
+        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%m%d%H%M')
+
+
         
         data = json.loads(open("data.json", 'r', encoding='utf-8').read())
         data.append([rate, int(now)])
