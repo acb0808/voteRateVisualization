@@ -1,0 +1,5 @@
+vote123.pem
+__pycache__/
+*.pyc
+clear.py
+db.json
