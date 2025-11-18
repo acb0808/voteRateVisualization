@@ -1,12 +1,12 @@
 import requests, time, json
-import datetime
+import datetime, math
 
 
 url = 'https://did-5.kw.ac.kr/vote/voteStatus/voteStatusBoard2.jsp'
 extend = 'https://did-5.kw.ac.kr/vote/voteCommon/keepalive.jsp'
 
 header = {
-    'Cookie':'_ga_9V4657DNPH=GS2.3.s1762403937$o3$g1$t1762404271$j21$l0$h0; _ga=GA1.1.350906218.1762099560; _ga_CYQ6ZQE3GZ=GS2.1.s1763054355$o13$g0$t1763054355$j60$l0$h0; SESSION=NGNjZTNkMmEtY2Y4YS00NGZmLTgxZWQtOWVlMzZiYjk2NGFm; JSESSIONID=42177818CFE16CF78232C6BB568B391D',
+    'Cookie':'SESSION=NmZlODgzOTAtNTU3OS00ODRmLTk0NzgtZmZmMTM2M2YzYmIz; JSESSIONID=75DC85E83A18A989871D2956BB0BF25D',
     'Host':'did-5.kw.ac.kr',
     'Origin':'https://did-5.kw.ac.kr',
     'Sec-Fetch-Dest':'empty',
@@ -42,6 +42,7 @@ def main():
         open("data.json", 'w', encoding='utf-8').write(json.dumps(data, ensure_ascii=False, indent=4))
 
         print(f'[{now}] 현재 투표율 {rate}% 기록 완료.')
+        
 
         extendSession()
-        time.sleep(300)  # 5분 대기
+        time.sleep(60)  # 5분 대기

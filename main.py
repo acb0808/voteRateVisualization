@@ -9,7 +9,7 @@ def index():
 
 @app.route('/api/data')
 def get_data():
-    with open('data.json') as f:
+    with open('data2.json') as f:
         data = json.load(f)
     return jsonify(data)
 

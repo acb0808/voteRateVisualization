@@ -106,10 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 한국 시간으로 변경
                 
                 // console.log('Parsed date:', date, 'from time string:', timeStr);
-
+                
                 return {
                     time: date.getTime() / 1000,
-                    value: item[0],
+                    value: Math.ceil(item[0] * 431 / 100) / 431 * 100
                 };
             }).reverse();
 
@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lineSeries.setData(formattedData);
 
             const lastPoint = formattedData[formattedData.length - 1];
+
+            document.querySelector('.subtitle').innerHTML = '현재 투표율은 '+ lastPoint.value.toFixed(2) + '% ('+Math.round(lastPoint.value / 100 * 431)+'명)입니다.';
+
             lineSeries.createPriceLine({
                 price: lastPoint.value,
                 color: '#4bc0c0',
@@ -125,6 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineStyle: LightweightCharts.LineStyle.Dashed,
                 axisLabelVisible: true,
                 title: '현재',
+            });
+
+            lineSeries.createPriceLine({
+                price: 40,
+                color: '#9e3333',
+                lineWidth: 1,
+                lineStyle: LightweightCharts.LineStyle.Dashed,
+                axisLabelVisible: true,
             });
 
             chart.timeScale().fitContent();
@@ -159,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = new Date(time * 1000);
         const minutes = date.getMinutes().toString().padStart(2, '0');
         return {
-            value: `${value.toFixed(2)}%`,
+            value: `${value.toFixed(2)}% (${Math.round(value / 100 * 431)}명)`,
             time: `${formatKoreanHour(time)} ${minutes}분`,
         };
     };

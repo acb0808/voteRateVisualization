@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 clear.py
 db.json
+data2.json
